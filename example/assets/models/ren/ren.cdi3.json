@@ -1,0 +1,647 @@
+{
+	"Version": 3,
+	"Parameters": [
+		{
+			"Id": "ParamAngleX",
+			"GroupId": "ParamGroupFace",
+			"Name": "Angle X"
+		},
+		{
+			"Id": "ParamAngleY",
+			"GroupId": "ParamGroupFace",
+			"Name": "Angle Y"
+		},
+		{
+			"Id": "ParamAngleZ",
+			"GroupId": "ParamGroupFace",
+			"Name": "Angle Z"
+		},
+		{
+			"Id": "ParamEyeLOpen",
+			"GroupId": "ParamGroupEye",
+			"Name": "Eye L Open"
+		},
+		{
+			"Id": "ParamEyeLSmile",
+			"GroupId": "ParamGroupEye",
+			"Name": "Eye L Smile"
+		},
+		{
+			"Id": "ParamEyeROpen",
+			"GroupId": "ParamGroupEye",
+			"Name": "Eye R Open"
+		},
+		{
+			"Id": "ParamEyeRSmile",
+			"GroupId": "ParamGroupEye",
+			"Name": "Eye R Smile"
+		},
+		{
+			"Id": "ParamEyeBallX",
+			"GroupId": "ParamGroupEyeballs",
+			"Name": "Eyeballs X"
+		},
+		{
+			"Id": "ParamEyeBallY",
+			"GroupId": "ParamGroupEyeballs",
+			"Name": "Eyeballs Y"
+		},
+		{
+			"Id": "ParamEyeSize",
+			"GroupId": "ParamGroupEyeballs",
+			"Name": "Eyeballs Shrink"
+		},
+		{
+			"Id": "ParamBrowLY",
+			"GroupId": "ParamGroupBrows",
+			"Name": "Eyebrow L Y"
+		},
+		{
+			"Id": "ParamBrowRY",
+			"GroupId": "ParamGroupBrows",
+			"Name": "Eyebrow R Y"
+		},
+		{
+			"Id": "ParamBrowLX",
+			"GroupId": "ParamGroupBrows",
+			"Name": "Eyebrow L X"
+		},
+		{
+			"Id": "ParamBrowRX",
+			"GroupId": "ParamGroupBrows",
+			"Name": "Eyebrow R X"
+		},
+		{
+			"Id": "ParamBrowLAngle",
+			"GroupId": "ParamGroupBrows",
+			"Name": "Eyebrow L Angle"
+		},
+		{
+			"Id": "ParamBrowRAngle",
+			"GroupId": "ParamGroupBrows",
+			"Name": "Eyebrow R Angle"
+		},
+		{
+			"Id": "ParamBrowLForm",
+			"GroupId": "ParamGroupBrows",
+			"Name": "Eyebrow L Form"
+		},
+		{
+			"Id": "ParamBrowRForm",
+			"GroupId": "ParamGroupBrows",
+			"Name": "Eyebrow R Form"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"GroupId": "ParamGroupMouth",
+			"Name": "Mouth Form"
+		},
+		{
+			"Id": "ParamMouthOpenY",
+			"GroupId": "ParamGroupMouth",
+			"Name": "Mouth Open"
+		},
+		{
+			"Id": "ParamBodyAngleX",
+			"GroupId": "ParamGroupBody",
+			"Name": "Body Rotatoin X"
+		},
+		{
+			"Id": "ParamBodyAngleY",
+			"GroupId": "ParamGroupBody",
+			"Name": "Body Rotatoin Y"
+		},
+		{
+			"Id": "ParamBodyAngleZ",
+			"GroupId": "ParamGroupBody",
+			"Name": "Body Rotatoin Z"
+		},
+		{
+			"Id": "ParamWaistAngleZ",
+			"GroupId": "ParamGroupBody",
+			"Name": "Waist Rotation Z"
+		},
+		{
+			"Id": "ParamBodyCenter",
+			"GroupId": "ParamGroupBody",
+			"Name": "Weight Shift"
+		},
+		{
+			"Id": "ParamBreath",
+			"GroupId": "ParamGroupBody",
+			"Name": "Breath"
+		},
+		{
+			"Id": "ParamLeftShoulderUp",
+			"GroupId": "ParamGroupBody",
+			"Name": "Shoulder L Y"
+		},
+		{
+			"Id": "ParamRightShoulderUp",
+			"GroupId": "ParamGroupBody",
+			"Name": "Shoulder R Y"
+		},
+		{
+			"Id": "ParamLegR",
+			"GroupId": "ParamGroupBody",
+			"Name": "Leg R"
+		},
+		{
+			"Id": "ParamLegL",
+			"GroupId": "ParamGroupBody",
+			"Name": "Leg L"
+		},
+		{
+			"Id": "ParamBodyAngleX2",
+			"GroupId": "ParamGroup",
+			"Name": "Body Rotation X2"
+		},
+		{
+			"Id": "ParamBodyAngleY2",
+			"GroupId": "ParamGroup",
+			"Name": "Body Rotation Y2"
+		},
+		{
+			"Id": "ParamBodyCenter2",
+			"GroupId": "ParamGroup",
+			"Name": "Weight Shift 2"
+		},
+		{
+			"Id": "ParamLeftShoulderUp2",
+			"GroupId": "ParamGroup",
+			"Name": "Shoulder L Y 2"
+		},
+		{
+			"Id": "ParamRightShoulderUp2",
+			"GroupId": "ParamGroup",
+			"Name": "Shoulder R Y 2"
+		},
+		{
+			"Id": "ParamArmL01",
+			"GroupId": "ParamGroupArmL",
+			"Name": "Arm L Shoulder Rotation"
+		},
+		{
+			"Id": "ParamArmL02",
+			"GroupId": "ParamGroupArmL",
+			"Name": "Arm L Elbow Rotation"
+		},
+		{
+			"Id": "ParamArmL03",
+			"GroupId": "ParamGroupArmL",
+			"Name": "Arm L Wrist Rotation"
+		},
+		{
+			"Id": "ParamHandL",
+			"GroupId": "ParamGroupArmL",
+			"Name": "Hand L"
+		},
+		{
+			"Id": "ParamHandLDrawOrder",
+			"GroupId": "ParamGroupArmL",
+			"Name": "Hand L Draw Order"
+		},
+		{
+			"Id": "ParamArmR01",
+			"GroupId": "ParamGroupArmR",
+			"Name": "Arm R Shoulder Rotation"
+		},
+		{
+			"Id": "ParamArmR02",
+			"GroupId": "ParamGroupArmR",
+			"Name": "Arm R Elbow Rotation"
+		},
+		{
+			"Id": "ParamArmR03",
+			"GroupId": "ParamGroupArmR",
+			"Name": "Arm R Wrist Rotation"
+		},
+		{
+			"Id": "ParamHandR",
+			"GroupId": "ParamGroupArmR",
+			"Name": "Hand R"
+		},
+		{
+			"Id": "ParamHandRDrawOrder",
+			"GroupId": "ParamGroupArmR",
+			"Name": "Hand R Draw Order"
+		},
+		{
+			"Id": "ParamHairFront",
+			"GroupId": "ParamGroupSway",
+			"Name": "Hair Sway Front"
+		},
+		{
+			"Id": "ParamHairSide",
+			"GroupId": "ParamGroupSway",
+			"Name": "Hair Move Side"
+		},
+		{
+			"Id": "ParamHairBack",
+			"GroupId": "ParamGroupSway",
+			"Name": "Hair Move Back"
+		},
+		{
+			"Id": "ParamHairFrontFuwa",
+			"GroupId": "ParamGroupSway",
+			"Name": "Front Hair Fluff"
+		},
+		{
+			"Id": "ParamHairSideFuwa",
+			"GroupId": "ParamGroupSway",
+			"Name": "Side Hair Flap"
+		},
+		{
+			"Id": "ParamHairBackFuwa",
+			"GroupId": "ParamGroupSway",
+			"Name": "Back Hair Fluff"
+		},
+		{
+			"Id": "ParamCollarString",
+			"GroupId": "ParamGroupSway",
+			"Name": "Collar Strap Sway"
+		},
+		{
+			"Id": "ParamNecklace1",
+			"GroupId": "ParamGroupSway",
+			"Name": "Necklace Sway 1"
+		},
+		{
+			"Id": "ParamNecklace2",
+			"GroupId": "ParamGroupSway",
+			"Name": "Necklace Sway 2"
+		},
+		{
+			"Id": "ParamNecklace3",
+			"GroupId": "ParamGroupSway",
+			"Name": "Necklace Sway 3"
+		},
+		{
+			"Id": "ParamPullHandle",
+			"GroupId": "ParamGroupSway",
+			"Name": "Puller Sway"
+		},
+		{
+			"Id": "ParamPocketString",
+			"GroupId": "ParamGroupSway",
+			"Name": "Pocket Band Sway"
+		},
+		{
+			"Id": "ParamJacket",
+			"GroupId": "ParamGroupSway",
+			"Name": "Jacket Sway"
+		},
+		{
+			"Id": "ParamCollarFuwa",
+			"GroupId": "ParamGroupSway",
+			"Name": "Collar Flap"
+		},
+		{
+			"Id": "ParamCollarStringFuwa",
+			"GroupId": "ParamGroupSway",
+			"Name": "Collar Strap Flap"
+		},
+		{
+			"Id": "ParamHologram",
+			"GroupId": "ParamGroupEffect",
+			"Name": "Hologram"
+		},
+		{
+			"Id": "ParamTransparent",
+			"GroupId": "ParamGroupEffect",
+			"Name": "See-through"
+		},
+		{
+			"Id": "ParamHologramPattern",
+			"GroupId": "ParamGroupEffect",
+			"Name": "Hologram Pattern"
+		},
+		{
+			"Id": "ParamMonochrome",
+			"GroupId": "ParamGroupEffect",
+			"Name": "Monochrome"
+		},
+		{
+			"Id": "ParamNight",
+			"GroupId": "ParamGroupEffect",
+			"Name": "Night"
+		},
+		{
+			"Id": "ParamLight",
+			"GroupId": "ParamGroupEffect",
+			"Name": "Light"
+		},
+		{
+			"Id": "ParamDisplayWidth1",
+			"GroupId": "ParamGroupEffect",
+			"Name": "Display 1 Width"
+		},
+		{
+			"Id": "ParamDisplayHeight1",
+			"GroupId": "ParamGroupEffect",
+			"Name": "Display 1 Height"
+		},
+		{
+			"Id": "ParamDisplayWidth2",
+			"GroupId": "ParamGroupEffect",
+			"Name": "Display 2 Width"
+		},
+		{
+			"Id": "ParamDisplayHeight2",
+			"GroupId": "ParamGroupEffect",
+			"Name": "Display 2 Height"
+		},
+		{
+			"Id": "ParamDisplayAngle",
+			"GroupId": "ParamGroupEffect",
+			"Name": "Display Angle"
+		},
+		{
+			"Id": "ParamNoise",
+			"GroupId": "ParamGroupEffect",
+			"Name": "Noise"
+		},
+		{
+			"Id": "ParamNoiseRotate",
+			"GroupId": "ParamGroupEffect",
+			"Name": "Noise Rotation"
+		}
+	],
+	"ParameterGroups": [
+		{
+			"Id": "ParamGroupFace",
+			"GroupId": "",
+			"Name": "Face"
+		},
+		{
+			"Id": "ParamGroupEye",
+			"GroupId": "",
+			"Name": "Eyes"
+		},
+		{
+			"Id": "ParamGroupEyeballs",
+			"GroupId": "",
+			"Name": "Eyeballs"
+		},
+		{
+			"Id": "ParamGroupBrows",
+			"GroupId": "",
+			"Name": "Eyebrows"
+		},
+		{
+			"Id": "ParamGroupMouth",
+			"GroupId": "",
+			"Name": "Mouth"
+		},
+		{
+			"Id": "ParamGroupBody",
+			"GroupId": "",
+			"Name": "Body"
+		},
+		{
+			"Id": "ParamGroup",
+			"GroupId": "",
+			"Name": "Body Physics"
+		},
+		{
+			"Id": "ParamGroupArmL",
+			"GroupId": "",
+			"Name": "Arm L"
+		},
+		{
+			"Id": "ParamGroupArmR",
+			"GroupId": "",
+			"Name": "Arm R"
+		},
+		{
+			"Id": "ParamGroupSway",
+			"GroupId": "",
+			"Name": "Sway"
+		},
+		{
+			"Id": "ParamGroupEffect",
+			"GroupId": "",
+			"Name": "Effect"
+		}
+	],
+	"Parts": [
+		{
+			"Id": "PartAll",
+			"Name": "Overall"
+		},
+		{
+			"Id": "PartSketch",
+			"Name": "[Guide Image]"
+		},
+		{
+			"Id": "PartEffect",
+			"Name": "Effect"
+		},
+		{
+			"Id": "PartCore",
+			"Name": "Core"
+		},
+		{
+			"Id": "PartHairFront",
+			"Name": "Front Hair"
+		},
+		{
+			"Id": "PartBrow",
+			"Name": "Eyebrow"
+		},
+		{
+			"Id": "PartEyeL",
+			"Name": "Eye L"
+		},
+		{
+			"Id": "PartEyeR",
+			"Name": "Eye R"
+		},
+		{
+			"Id": "PartNose",
+			"Name": "Nose"
+		},
+		{
+			"Id": "PartMouth",
+			"Name": "Mouth"
+		},
+		{
+			"Id": "PartFace",
+			"Name": "Face"
+		},
+		{
+			"Id": "PartEar",
+			"Name": "Ears"
+		},
+		{
+			"Id": "PartNeck",
+			"Name": "Neck"
+		},
+		{
+			"Id": "PartHairBack",
+			"Name": "Back Hair"
+		},
+		{
+			"Id": "PartJacket01",
+			"Name": "Jacket"
+		},
+		{
+			"Id": "PartArmL",
+			"Name": "Arm L"
+		},
+		{
+			"Id": "PartArmR",
+			"Name": "Arm R"
+		},
+		{
+			"Id": "PartBody",
+			"Name": "Upper Body"
+		},
+		{
+			"Id": "PartDisplay",
+			"Name": "Display"
+		},
+		{
+			"Id": "PartMonochrome",
+			"Name": "Monochrome"
+		},
+		{
+			"Id": "PartNight",
+			"Name": "Night"
+		},
+		{
+			"Id": "PartHologram",
+			"Name": "Hologram"
+		},
+		{
+			"Id": "PartTransparent",
+			"Name": "See-through"
+		},
+		{
+			"Id": "PartHairShadow",
+			"Name": "Hair Shadow"
+		},
+		{
+			"Id": "PartEyeballL",
+			"Name": "Eyeball L"
+		},
+		{
+			"Id": "PartEyeballR",
+			"Name": "Eyeball R"
+		},
+		{
+			"Id": "PartHairline",
+			"Name": "Hairline L"
+		},
+		{
+			"Id": "PartJacket02",
+			"Name": "Jacket"
+		},
+		{
+			"Id": "PartJacketArmL",
+			"Name": "Jacket Arm L"
+		},
+		{
+			"Id": "PartJacketArmR",
+			"Name": "Jacket Arm R"
+		},
+		{
+			"Id": "PartJacketShadow",
+			"Name": "Jacket Shadow"
+		},
+		{
+			"Id": "PartNecklace",
+			"Name": "Necklace"
+		},
+		{
+			"Id": "PartShirt",
+			"Name": "Shirt"
+		},
+		{
+			"Id": "PartLowerBody",
+			"Name": "Lower Body"
+		},
+		{
+			"Id": "PartDisplayPaint",
+			"Name": "Display Fill"
+		},
+		{
+			"Id": "PartShadow",
+			"Name": "Shadow"
+		},
+		{
+			"Id": "PartBrow2",
+			"Name": "Eyebrow"
+		},
+		{
+			"Id": "PartEyeL2",
+			"Name": "Eye L"
+		},
+		{
+			"Id": "PartEyeR2",
+			"Name": "Eye R"
+		},
+		{
+			"Id": "PartHairShadowOut",
+			"Name": "Hair Shadow Out"
+		},
+		{
+			"Id": "PartPupilL",
+			"Name": "Pupil L"
+		},
+		{
+			"Id": "PartPupilR",
+			"Name": "Pupil R"
+		},
+		{
+			"Id": "PartArmLDrawOrder",
+			"Name": "Arm L Draw Order"
+		},
+		{
+			"Id": "PartArmRDrawOrder",
+			"Name": "Arm R Draw Order"
+		},
+		{
+			"Id": "PartBodyOut",
+			"Name": "Torso Out"
+		},
+		{
+			"Id": "PartDisplay01",
+			"Name": "Display 1"
+		},
+		{
+			"Id": "PartDisplay02",
+			"Name": "Display 2"
+		},
+		{
+			"Id": "PartEyeballL2",
+			"Name": "Eyeball L"
+		},
+		{
+			"Id": "PartEyeballR2",
+			"Name": "Eyeball R"
+		},
+		{
+			"Id": "PartHairBackOut",
+			"Name": "Back Hair Out"
+		},
+		{
+			"Id": "PartPupilL2",
+			"Name": "Pupil L"
+		},
+		{
+			"Id": "PartPupilR2",
+			"Name": "Pupil R"
+		}
+	],
+	"CombinedParameters": [
+		[
+			"ParamAngleX",
+			"ParamAngleY"
+		],
+		[
+			"ParamMouthForm",
+			"ParamMouthOpenY"
+		]
+	]
+}
