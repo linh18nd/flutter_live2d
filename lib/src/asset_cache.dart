@@ -65,11 +65,11 @@ Future<String> _resolveModelDir(String modelDir) async {
 /// base64 of the asset directory name to avoid collisions on the disk.
 Future<String> _extractAssetDirToCache(String assetDir) async {
   final normalizedAssetDir = _ensureTrailingSlash(assetDir);
-  final tempDir = await getTemporaryDirectory();
+  final tempPath = await FlutterLive2dPlatform.instance.getTempDirectory();
   final key = base64UrlEncode(
     utf8.encode(normalizedAssetDir),
   ).replaceAll('=', '');
-  final outDir = Directory('${tempDir.path}/flutter_live2d_models/$key/');
+  final outDir = Directory('$tempPath/flutter_live2d_models/$key/');
   final marker = File('${outDir.path}.ready');
 
   if (outDir.existsSync() && marker.existsSync()) {

@@ -40,6 +40,11 @@ abstract class FlutterLive2dPlatform extends PlatformInterface {
     throw UnimplementedError('getPlatformVersion() has not been implemented.');
   }
 
+  /// Returns the platform's cache/temp directory path.
+  Future<String> getTempDirectory() {
+    throw UnimplementedError('getTempDirectory() has not been implemented.');
+  }
+
   /// Loads a Live2D model into the native view identified by [viewId].
   ///
   /// [modelDir] must be an absolute filesystem directory; asset paths are

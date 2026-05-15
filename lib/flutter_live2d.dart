@@ -23,7 +23,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:path_provider/path_provider.dart';
 
 import 'flutter_live2d_platform_interface.dart';
 

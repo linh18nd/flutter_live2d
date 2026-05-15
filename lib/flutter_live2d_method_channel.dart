@@ -27,6 +27,12 @@ class MethodChannelFlutterLive2d extends FlutterLive2dPlatform {
   }
 
   @override
+  Future<String> getTempDirectory() async {
+    final path = await methodChannel.invokeMethod<String>('getTempDirectory');
+    return path!;
+  }
+
+  @override
   Future<bool> loadModel({
     required int viewId,
     required String modelDir,

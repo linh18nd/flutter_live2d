@@ -1,5 +1,5 @@
 group = "com.linh18nd.flutter_live2d"
-version = "1.0.1"
+version = "1.0.2"
 
 buildscript {
     val kotlinVersion = "2.2.20"

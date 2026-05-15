@@ -41,6 +41,9 @@ public class FlutterLive2dPlugin: NSObject, FlutterPlugin {
         case "getPlatformVersion":
             result("iOS " + UIDevice.current.systemVersion)
 
+        case "getTempDirectory":
+            result(NSTemporaryDirectory())
+
         case "loadModel":
             guard let viewId = requireInt64(args, "viewId", result) else { return }
             guard let modelDir = requireNonEmptyString(args, "modelDir", result) else { return }

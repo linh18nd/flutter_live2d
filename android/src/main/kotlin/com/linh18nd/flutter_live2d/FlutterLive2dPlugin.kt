@@ -1,5 +1,6 @@
 package com.linh18nd.flutter_live2d
 
+import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -11,6 +12,7 @@ import io.flutter.plugin.common.MethodChannel.Result
 class FlutterLive2dPlugin : FlutterPlugin, MethodCallHandler {
 
     private lateinit var channel: MethodChannel
+    private lateinit var appContext: Context
     private val mainHandler = Handler(Looper.getMainLooper())
 
     // View registry: Flutter assigns each PlatformView an integer id.
@@ -18,6 +20,7 @@ class FlutterLive2dPlugin : FlutterPlugin, MethodCallHandler {
     private val viewRegistry = mutableMapOf<Int, Live2DPlatformView>()
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        appContext = binding.applicationContext
         channel = MethodChannel(binding.binaryMessenger, "flutter_live2d")
         channel.setMethodCallHandler(this)
 
@@ -35,6 +38,9 @@ class FlutterLive2dPlugin : FlutterPlugin, MethodCallHandler {
 
             "getPlatformVersion" ->
                 result.success("Android ${android.os.Build.VERSION.RELEASE}")
+
+            "getTempDirectory" ->
+                result.success(appContext.cacheDir.absolutePath)
 
             "loadModel" -> {
                 val viewId = call.requireInt("viewId", result) ?: return

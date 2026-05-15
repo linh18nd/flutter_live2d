@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 - 2026-05-15
+
+### Changed
+- Remove `path_provider` dependency; temp directory is now resolved via a native platform channel call.
+
 ## 1.0.1 - 2026-05-15
 
 ### Fixed

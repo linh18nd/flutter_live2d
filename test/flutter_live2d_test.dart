@@ -49,10 +49,11 @@ class _MockFlutterLive2dPlatform
       throw UnimplementedError();
 
   @override
-  Future<void> setMotionSpeed({required int viewId, required double speed}) {
-    // TODO: implement setMotionSpeed
-    throw UnimplementedError();
-  }
+  Future<void> setMotionSpeed({required int viewId, required double speed}) =>
+      throw UnimplementedError();
+
+  @override
+  Future<String> getTempDirectory() => Future.value('/tmp');
 }
 
 void main() {

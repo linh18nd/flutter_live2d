@@ -3,6 +3,8 @@
 A Flutter plugin to render Live2D Cubism models on Android and iOS using
 the Cubism Native SDK and OpenGL ES 2.
 
+![Demo](https://raw.githubusercontent.com/linh18nd/flutter_live2d/main/assets/demo/demo.gif)
+
 ## Features
 
 - Embed any Live2D Cubism `.model3.json` directly inside a Flutter widget tree.
