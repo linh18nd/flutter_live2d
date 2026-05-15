@@ -217,8 +217,8 @@ Extends `ValueNotifier<Live2DViewState>`.
 
 ## License
 
-Plugin source: BSD 3-Clause — see [LICENSE](LICENSE).
-Bundled Cubism Native SDK and Cubism Core: © Live2D Inc., subject to the
-[Free Material License](https://www.live2d.com/eula/live2d-free-material-license-agreement_en.html)
-or [Proprietary Software License](https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html).
-Review Live2D's terms before shipping.
+Plugin source code: **BSD 3-Clause** — see [LICENSE](LICENSE).
+
+The bundled Live2D Cubism Native SDK and Cubism Core are © Live2D Inc.
+and are governed by their own license terms — see [NOTICES](NOTICES).
+Review Live2D's terms before shipping a product.

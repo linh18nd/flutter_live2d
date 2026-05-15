@@ -28,14 +28,3 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 
----
-
-NOTE: This license applies only to the flutter_live2d plugin source code.
-The bundled Live2D Cubism Native SDK and Cubism Core libraries are owned by
-Live2D Inc. and are governed by their own license terms. See:
-
-  - https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html
-  - https://www.live2d.com/eula/live2d-distribution-license_en.html
-
-Redistributing this plugin together with the bundled Cubism SDK requires
-compliance with Live2D's licensing terms.

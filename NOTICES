@@ -1,0 +1,18 @@
+Third-party notices
+===================
+
+The flutter_live2d plugin bundles the Live2D Cubism Native SDK and
+Cubism Core library, which are owned by Live2D Inc. and are NOT covered
+by the BSD 3-Clause license that applies to the plugin source code.
+
+Before using or distributing this plugin, review the applicable
+Live2D license for your use case:
+
+  Free Material License (non-commercial / small commercial):
+  https://www.live2d.com/eula/live2d-free-material-license-agreement_en.html
+
+  Proprietary Software License (commercial):
+  https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html
+
+  Distribution License:
+  https://www.live2d.com/eula/live2d-distribution-license_en.html
