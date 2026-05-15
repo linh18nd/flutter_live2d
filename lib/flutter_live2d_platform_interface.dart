@@ -119,5 +119,4 @@ abstract class FlutterLive2dPlatform extends PlatformInterface {
   }) {
     throw UnimplementedError('setMotionSpeed() has not been implemented.');
   }
-
 }

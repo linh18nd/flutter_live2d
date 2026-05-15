@@ -418,8 +418,11 @@ class _Live2DDemoPageState extends State<Live2DDemoPage> {
               _sectionLabel('MOTION SPEED'),
               Row(
                 children: [
-                  const Icon(Icons.slow_motion_video,
-                      size: 16, color: Color(0xFF888888)),
+                  const Icon(
+                    Icons.slow_motion_video,
+                    size: 16,
+                    color: Color(0xFF888888),
+                  ),
                   Expanded(
                     child: Slider(
                       value: slot.motionSpeed,
@@ -438,7 +441,9 @@ class _Live2DDemoPageState extends State<Live2DDemoPage> {
                     child: Text(
                       '${slot.motionSpeed.toStringAsFixed(1)}×',
                       style: const TextStyle(
-                          fontSize: 11, color: Color(0xFF555555)),
+                        fontSize: 11,
+                        color: Color(0xFF555555),
+                      ),
                       textAlign: TextAlign.right,
                     ),
                   ),
@@ -451,8 +456,11 @@ class _Live2DDemoPageState extends State<Live2DDemoPage> {
                     },
                     child: const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 4),
-                      child: Icon(Icons.refresh,
-                          size: 16, color: Color(0xFF888888)),
+                      child: Icon(
+                        Icons.refresh,
+                        size: 16,
+                        color: Color(0xFF888888),
+                      ),
                     ),
                   ),
                 ],

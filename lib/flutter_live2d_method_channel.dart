@@ -104,5 +104,4 @@ class MethodChannelFlutterLive2d extends FlutterLive2dPlatform {
       'speed': speed,
     });
   }
-
 }

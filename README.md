@@ -3,24 +3,19 @@
 A Flutter plugin to render Live2D Cubism models on Android and iOS using
 the Cubism Native SDK and OpenGL ES 2.
 
-> **Status:** pre-1.0. The Dart API may still change between minor versions.
-> See [CHANGELOG](CHANGELOG.md) for breaking changes.
-
 ## Features
 
 - Embed any Live2D Cubism `.model3.json` directly inside a Flutter widget tree.
-- Reactive controller built on `ValueNotifier<Live2DViewState>` — drives UI
-  via `ValueListenableBuilder` with no boilerplate.
-- Async-first lifecycle (`whenAttached`, `Future`-returning commands) — no
-  callback soup.
-- Multiple views side-by-side (Android shares one render thread + EGL
-  context; iOS gives each view its own context).
-- Built-in touch tracking (eyes / head follow finger via the Cubism
-  drag input).
-- Load models from `assets/` (extracted to cache on first use) or from any
-  absolute filesystem path (e.g. downloaded models).
-- Pause / resume the render loop to save battery when the view is
-  offscreen.
+- **Transparent background by default** — use a plain `Stack` to place Flutter
+  widgets behind or in front of the model; no extra configuration needed.
+- Reactive controller (`ValueNotifier<Live2DViewState>`) — drive UI off state
+  changes with `ValueListenableBuilder`, no manual `setState`.
+- Async-first lifecycle: `whenAttached` + `Future`-returning commands.
+- Multiple views side-by-side, each with its own independent controller.
+- Built-in touch tracking — model eyes/head follow the user's finger.
+- Load from `assets/` or any absolute filesystem path.
+- Motion playback speed control at runtime.
+- Pause / resume the render loop to save battery.
 
 ## Platforms
 
@@ -29,18 +24,16 @@ the Cubism Native SDK and OpenGL ES 2.
 | Android | API 24 (Android 7.0) |
 | iOS | 13.0 |
 
-Bundled Cubism Core supports `.moc3` file versions **3.0 through 5.3**.
+Bundled Cubism Core supports `.moc3` versions **3.0 – 5.3**.
 
 ## Installation
 
 ```yaml
 dependencies:
-  flutter_live2d: <latest_version>
+  flutter_live2d: ^1.0.0
 ```
 
-### Bundling models as assets
-
-Place a model folder under `assets/` and declare it in `pubspec.yaml`:
+Declare your model folder in `pubspec.yaml`:
 
 ```yaml
 flutter:
@@ -48,23 +41,9 @@ flutter:
     - assets/models/your_model/
 ```
 
-The folder must contain a `*.model3.json` plus every file it references —
-`.moc3`, textures, motions, expressions, physics, pose. Asset directories
-are extracted lazily into the app's cache the first time you `loadModel`
-them, then reused on subsequent loads.
-
-### Loading from the filesystem
-
-Already have a model on disk (e.g. downloaded into the documents
-directory)? Pass an absolute path:
-
-```dart
-final dir = await getApplicationDocumentsDirectory();
-await controller.loadModel(
-  modelDir: '${dir.path}/downloaded/ren/',
-  modelFileName: 'ren.model3.json',
-);
-```
+The folder must contain a `*.model3.json` and every file it references —
+`.moc3`, textures, motions, expressions, physics, pose. Files are extracted
+to cache on first use and reused on subsequent launches.
 
 ## Quick start
 
@@ -74,96 +53,107 @@ import 'package:flutter_live2d/flutter_live2d.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
-
   @override
   State<MyPage> createState() => _MyPageState();
 }
 
 class _MyPageState extends State<MyPage> {
-  final _controller = Live2DViewController();
+  final _ctrl = Live2DViewController();
 
   @override
   void initState() {
     super.initState();
-    _autoLoad();
-  }
-
-  Future<void> _autoLoad() async {
-    // The native GL surface is created asynchronously after the widget
-    // mounts. `whenAttached` resolves once it's ready.
-    await _controller.whenAttached;
-    await _controller.loadModel(
+    // Wait for the native GL surface, then load.
+    _ctrl.whenAttached.then((_) => _ctrl.loadModel(
       modelDir: 'assets/models/your_model/',
       modelFileName: 'your_model.model3.json',
-    );
+    ));
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  void dispose() { _ctrl.dispose(); super.dispose(); }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Live2DView(controller: _controller),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // ① Flutter background — full control over color, image, gradient…
+          Container(color: Colors.white),
+          // ② Live2D renders transparently on top.
+          Live2DView(controller: _ctrl),
+          // ③ Any Flutter widget above the model.
+          const Positioned(
+            bottom: 24, left: 0, right: 0,
+            child: Text('Hello Live2D', textAlign: TextAlign.center),
+          ),
+        ],
+      ),
     );
   }
 }
 ```
 
-### Reactive UI overlays
+## Usage examples
 
-The controller is a `ValueListenable<Live2DViewState>`, so you can drive
-status indicators, error banners or buttons off of it without manual
-`setState` calls:
+### Load from the filesystem
+
+```dart
+final dir = await getApplicationDocumentsDirectory();
+await controller.loadModel(
+  modelDir: '${dir.path}/downloaded/ren/',
+  modelFileName: 'ren.model3.json',
+);
+```
+
+### Motions, expressions and parameters
+
+```dart
+await controller.startMotion(group: 'Idle');          // named group
+await controller.startMotion(group: '', index: 2);    // unnamed group
+await controller.setExpression(0);
+await controller.setParameter('ParamAngleX', 30.0);
+```
+
+### Motion playback speed
+
+```dart
+controller.setMotionSpeed(2.0);  // 2× speed
+controller.setMotionSpeed(0.5);  // half speed
+controller.setMotionSpeed(0.0);  // freeze motion (physics keeps running)
+controller.setMotionSpeed(1.0);  // normal
+```
+
+### Reactive state overlay
 
 ```dart
 ValueListenableBuilder<Live2DViewState>(
   valueListenable: controller,
-  builder: (_, state, _) {
+  builder: (_, state, __) {
     if (state.isLoadingModel) return const CircularProgressIndicator();
-    if (state.lastError != null) return Text('error: ${state.lastError!.code}');
-    if (state.isLoaded) return Text('loaded: ${state.loadedModel!.modelFileName}');
+    if (state.lastError != null) return Text(state.lastError!.code);
+    if (state.isLoaded) return Text(state.loadedModel!.modelFileName);
     return const SizedBox.shrink();
   },
 )
 ```
 
-### Triggering motions and expressions
-
-```dart
-await controller.startMotion(group: 'Idle');           // group from model
-await controller.startMotion(group: '', index: 2);     // unnamed group
-await controller.setExpression(0);                     // by index
-await controller.setParameter('ParamAngleX', 30.0);    // raw parameter
-```
-
 ### Multiple views
 
-Place several `Live2DView`s on the same page; each gets its own controller
-and runs independently. On Android they share a single render thread and
-EGL context (so frame time scales linearly with view count); on iOS each
-view has its own GL context.
-
 ```dart
-Row(
-  children: [
-    Expanded(child: Live2DView(controller: c1)),
-    Expanded(child: Live2DView(controller: c2)),
-  ],
-)
+Row(children: [
+  Expanded(child: Live2DView(controller: c1)),
+  Expanded(child: Live2DView(controller: c2)),
+])
 ```
 
-See [`example/`](example/) for a runnable demo with three sample models
-and two side-by-side views.
+See [`example/`](example/) for a full demo: three models, two side-by-side
+views, motion speed slider, and a Flutter gradient background.
 
 ## API reference
 
 ### `Live2DView`
-
-Widget hosting the native GL surface.
 
 | Property | Type | Description |
 | --- | --- | --- |
@@ -171,112 +161,64 @@ Widget hosting the native GL surface.
 
 ### `Live2DViewController`
 
-Extends `ValueNotifier<Live2DViewState>`. Listen to lifecycle and command
-state via `addListener` / `ValueListenableBuilder`, or pull a snapshot
-from `controller.value`.
+Extends `ValueNotifier<Live2DViewState>`.
 
 | Method / property | Description |
 | --- | --- |
-| `whenAttached` | `Future<void>` that completes when the view enters `Live2DLifecycle.attached`. |
-| `loadModel({modelDir, modelFileName})` | Load a model. `modelDir` accepts an asset path or absolute path. Returns `bool`. |
-| `unloadModel()` | Free the loaded model and its native resources. |
+| `whenAttached` | `Future<void>` — resolves when the native view is ready. |
+| `loadModel({modelDir, modelFileName})` | Load a model; returns `bool`. |
+| `unloadModel()` | Unload and free native resources. |
 | `setRenderingPaused(bool)` | Pause / resume the GL render loop. |
-| `startMotion({group, index, priority})` | Play a motion. `priority`: 0=none, 1=idle, 2=normal, 3=force. |
+| `startMotion({group, index, priority})` | Play a motion. Priority: 0 none · 1 idle · 2 normal · 3 force. |
 | `setExpression(index)` | Switch expression by index. |
-| `setParameter(id, value)` | Set a model parameter (e.g. `ParamAngleX`). |
-| `dispose()` | Free the controller's listeners. **Always call this** in your widget's `dispose`. |
+| `setParameter(id, value)` | Set a Cubism model parameter (e.g. `ParamAngleX`). |
+| `setMotionSpeed(speed)` | Speed multiplier for motions. `1.0` = normal, `0.0` = paused. Physics unaffected. |
+| `dispose()` | Release listeners. **Always call in `dispose()`**. |
 
 ### `Live2DViewState`
 
-Immutable snapshot exposed as `controller.value`.
-
 | Field | Type | Description |
 | --- | --- | --- |
-| `lifecycle` | `Live2DLifecycle` | `detached` (no view) or `attached` (live). |
-| `isLoadingModel` | `bool` | True while a `loadModel` call is in flight. |
-| `loadedModel` | `Live2DLoadedModel?` | Currently loaded model, or null. |
-| `isRenderingPaused` | `bool` | Current render-loop paused flag. |
-| `lastError` | `Live2DException?` | Last error, cleared on the next success. |
-| `isAttached` | `bool` | `lifecycle == Live2DLifecycle.attached`. |
+| `lifecycle` | `Live2DLifecycle` | `detached` or `attached`. |
+| `isAttached` | `bool` | `lifecycle == attached`. |
+| `isLoadingModel` | `bool` | `loadModel` in flight. |
 | `isLoaded` | `bool` | `loadedModel != null`. |
+| `loadedModel` | `Live2DLoadedModel?` | Currently loaded model. |
+| `isRenderingPaused` | `bool` | Render loop paused. |
+| `lastError` | `Live2DException?` | Last error; cleared on next success. |
 
-### `Live2DException`
+### `Live2DException` error codes
 
-Thrown by all controller methods on native errors.
-
-| `code` | Meaning |
+| Code | Meaning |
 | --- | --- |
-| `VIEW_NOT_ATTACHED` | Called before the view attached. Await `whenAttached`. |
+| `VIEW_NOT_ATTACHED` | Command called before `whenAttached`. |
 | `VIEW_NOT_FOUND` | Native view already disposed. |
 | `INVALID_ARGS` | Missing or invalid argument. |
 | `LOAD_FAILED` | Native side rejected the model. |
-| `CONTROLLER_DISPOSED` | Method called on a disposed controller. |
-| `NATIVE_ERROR` | Generic native failure with a more specific `message`. |
+| `CONTROLLER_DISPOSED` | Controller already disposed. |
+| `NATIVE_ERROR` | Generic native failure — check `message`. |
 
 ## How it works
 
-- **Asset extraction.** When you pass an asset directory to `loadModel`,
-  the plugin copies every file under it into the app's temporary
-  directory on first use and tells the native side to load from there.
-  A `.ready` marker file lets subsequent app launches skip the copy if
-  the cache already exists.
-- **Touch tracking.** Touches inside `Live2DView` are forwarded to the
-  Cubism `SetDragging` API automatically, so the model's eyes and head
-  follow the user's finger without extra wiring.
-- **Render thread (Android).** All views share a single
-  `Live2D-RenderHub` thread running on one EGL context. Disposal is
-  serialized through this thread so widget removal can never race
-  in-flight rendering.
-- **Render thread (iOS).** Each view drives its own `CADisplayLink` on
-  the main runloop with its own GL context.
-- **Cubism framework refcount.** The Cubism framework is initialized once
-  on first model load and torn down after the last view goes away,
-  reference-counted on both platforms.
-
-## Lifecycle & background behavior
-
-- The render loop keeps running while the app is foregrounded, even when
-  the view is offscreen (e.g. behind a route). Call
-  `controller.setRenderingPaused(true)` to suspend it manually when you
-  know the view won't be visible.
-- When a `Live2DView` is removed from the widget tree, the native view is
-  destroyed and the controller transitions to `Live2DLifecycle.detached`.
-  Re-adding the widget with the same controller re-attaches and
-  `whenAttached` resolves again.
+- **Asset extraction.** Asset directories are copied to the app's temp folder on first load; a `.ready` marker skips the copy on subsequent launches.
+- **Transparent rendering.** GL always clears to `(0,0,0,0)`. iOS uses `CAEAGLLayer.isOpaque = false`; Android uses `TextureView.isOpaque = false` + `EGL_ALPHA_SIZE = 8`.
+- **Render thread — Android.** All views share one `Live2D-RenderHub` thread and one EGL context; disposal is serialized through the same thread.
+- **Render thread — iOS.** All views share one serial dispatch queue and one `EAGLContext`. A `CADisplayLink` drives each view; frame pumps are dispatched to the queue, keeping GL calls fully serialized.
+- **Framework refcount.** Cubism is initialized on first load and torn down after the last view is disposed.
 
 ## Troubleshooting
 
-- **`Live2DException(VIEW_NOT_ATTACHED)`** — you called a command before
-  the native view finished initializing. Wrap your first call with
-  `await controller.whenAttached;`.
-- **`Live2DException(LOAD_FAILED)`** — the native side parsed the
-  `.model3.json` but couldn't load it. Common causes: wrong `modelDir`,
-  missing texture / motion / physics file referenced by the json, or a
-  `.moc3` newer than the bundled Cubism Core. Check `lastError.message`.
-- **`Live2DException(INVALID_ARGS)`: "No assets found under ..."** —
-  the asset directory wasn't declared under `flutter.assets` in
-  `pubspec.yaml`, or the path is misspelled.
-- **Hot reload doesn't show native changes.** Hot reload only patches
-  Dart. Edits in Kotlin / Swift / C++ require `flutter run` or a hot
-  restart that triggers a rebuild.
-- **`group: ''`** is valid in `startMotion` and refers to the default /
-  unnamed group in the model's `.model3.json`.
-
-## Example
-
-See [`example/`](example/) for a full demo featuring:
-
-- Three bundled sample models (Ren, Mao, IceGirl).
-- Two side-by-side `Live2DView`s, each with its own controller.
-- Independent load / unload, motion and expression triggers per slot.
-- A toggle to mount / unmount a view at runtime — exercise the disposal
-  path.
+| Symptom | Fix |
+| --- | --- |
+| `VIEW_NOT_ATTACHED` | Await `controller.whenAttached` before the first command. |
+| `LOAD_FAILED` | Check `lastError.message` — wrong path, missing file, or `.moc3` too new for the bundled Core. |
+| `INVALID_ARGS: No assets found` | Declare the folder under `flutter.assets` in `pubspec.yaml`. |
+| Hot reload ignores native changes | Native code (Kotlin/Swift/C++) requires a full rebuild, not hot reload. |
 
 ## License
 
-The plugin source is under the project license (BSD 3-Clause; see
-[LICENSE](LICENSE)). The bundled Cubism Native SDK and Cubism Core
-belong to Live2D Inc. and are subject to Live2D's [Free Material
-License](https://www.live2d.com/eula/live2d-free-material-license-agreement_en.html)
-or [Proprietary Software License](https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html);
-review their terms before shipping.
+Plugin source: BSD 3-Clause — see [LICENSE](LICENSE).
+Bundled Cubism Native SDK and Cubism Core: © Live2D Inc., subject to the
+[Free Material License](https://www.live2d.com/eula/live2d-free-material-license-agreement_en.html)
+or [Proprietary Software License](https://www.live2d.com/eula/live2d-proprietary-software-license-agreement_en.html).
+Review Live2D's terms before shipping.
