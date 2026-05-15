@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'flutter_live2d'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'Flutter plugin for Live2D Cubism SDK (Native).'
   s.description      = 'Renders Live2D Cubism models inside a Flutter app via OpenGL ES2.'
   s.homepage         = 'https://github.com/linh18nd/flutter_live2d'

@@ -2,7 +2,7 @@ name: flutter_live2d
 description: >-
   A Flutter plugin that renders Live2D Cubism models inside Android and iOS
   apps via OpenGL ES 2.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/linh18nd/flutter_live2d
 repository: https://github.com/linh18nd/flutter_live2d
 

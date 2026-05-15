@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 - 2026-05-15
+
+### Fixed
+- Use clean BSD-3-Clause LICENSE file for OSI license detection on pub.dev.
+- Move Cubism SDK third-party notices to a separate NOTICES file.
+
 ## 1.0.0 - 2026-05-15
 
 ### Added
